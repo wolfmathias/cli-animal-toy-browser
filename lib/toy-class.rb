@@ -27,7 +27,7 @@ class Toy
         puts self.description
     end 
 
-    def self.new_from_site
-
+    def @status=(status)
+        
     end 
 end 

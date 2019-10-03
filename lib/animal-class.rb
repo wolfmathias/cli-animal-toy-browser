@@ -31,6 +31,10 @@ class Animal
         puts "Bio: #{self.bio}"
     end
 
+    def display_toys
+        self.toys.each {|toy| puts "#{toy.name}"}
+    end 
+
     # Use Donor donate method instead?
     # def donate
     #     puts
