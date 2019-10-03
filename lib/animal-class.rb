@@ -1,10 +1,13 @@
 class Animal
-    attr_accessor :name, :species, :sex, :born, :bio, :profile_url
+    attr_accessor :name, :species, :sex, :born, :bio, :profile_url, :toys
     @@all = []
 
     def initialize(animal_info)
-        animal_info.each {|key, value| self.send("#{key}=", value)}
-        @@all << self 
+        animal_info.each do |key, value| 
+            self.send("#{key}=", value)
+        end
+        @toys = []
+        @@all << self
     end 
 
     def self.all
@@ -28,11 +31,12 @@ class Animal
         puts "Bio: #{self.bio}"
     end
 
-    def donate
-        puts
-        puts "We're sending a toy on your behalf, #{self.name} will be very happy!"
-        ToyBrowser::CLI.new.donate_again?
-    end
+    # Use Donor donate method instead?
+    # def donate
+    #     puts
+    #     puts "We're sending a toy on your behalf, #{self.name} will be very happy!"
+    #     ToyBrowser::CLI.new.donate_again?
+    # end
 
     def self.create_from_url(url)
         animal_list = AnimalScraper.scrape_animal_info(url)

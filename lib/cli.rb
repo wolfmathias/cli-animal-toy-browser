@@ -1,8 +1,19 @@
 require 'readline'
 
 class ToyBrowser::CLI
+    attr_reader :user 
+
+    def initialize
+        puts "Welcome! Let's start with getting your name:"
+        name = nil 
+        while name == nil
+            name = gets.strip 
+            @user = Donor.find_or_create_by_name(name)
+        end 
+    end
 
     def call
+        2.times {puts}
         puts "Choose which animal you want to buy a toy for:"
         list_animals 
         menu
@@ -23,7 +34,7 @@ class ToyBrowser::CLI
             input = gets.strip
             if input.to_i <= Toy.all.count && input.to_i != 0
             current_toy = Toy.all[input.to_i-1]
-            current_animal.donate #add method argument to add toy to animal's list of donated items
+            @user.donate(current_animal, current_toy) #add method argument to add toy to animal's list of donated items
             elsif input == "list"
             call 
             elsif input == "exit"
@@ -34,21 +45,21 @@ class ToyBrowser::CLI
         end
     end 
 
-    def donate_again?
-        input = nil        
-        while input == nil
-            
-            puts "Do you want to donate to another animal? (y/n):"
-            input = gets.strip
-            if input == "y"
-            call
-            elsif input == "n"
-            thank_you
-            else
-            puts "Do you want to donate to another animal? (y/n):"
-            end 
-        end 
-    end 
+    # def donate_again?
+    #     # submenu displayed after user donates. 
+    #     input = nil        
+    #     while input == nil
+    #         puts "Do you want to donate to another animal? (y/n):"
+    #         input = gets.strip
+    #         if input == "y"
+    #         call
+    #         elsif input == "n"
+    #         thank_you
+    #         else
+    #         puts "Do you want to donate to another animal? (y/n):"
+    #         end 
+    #     end 
+    # end 
 
     def thank_you
         puts "Thank you! Come back again!"
@@ -66,6 +77,7 @@ class ToyBrowser::CLI
                 current_animal.display_info
                 puts 
                 puts "To donate to #{current_animal.name}, type 'donate'. Or type 'list' to get back to the list of animals."
+                puts "You can also type 'donations' to see a list of items you have already donated."
                 input = nil 
                 while input != "exit" 
                     input = gets.strip.downcase  
@@ -75,6 +87,8 @@ class ToyBrowser::CLI
                     list_toys(current_animal)
                     elsif input.downcase == "list"
                     call
+                    #elsif input == "donations"
+                    
                     elsif input == "exit"
                     thank_you
                     else 

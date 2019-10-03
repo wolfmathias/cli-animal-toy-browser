@@ -5,6 +5,7 @@ class Toy
     def initialize
         @status = "Waiting to be donated"
         @@all << self 
+        
     end 
 
     def self.all
@@ -13,8 +14,10 @@ class Toy
 
     def self.list_all
         @@all.each.with_index(1) do |toy, i| 
-            puts "#{i}. #{toy.name} -- #[toy.price}"
+            puts "-----------------------------------"
+            puts "#{i}. #{toy.name} -- #{toy.price}"
             puts "Description: #{toy.description}"
+            puts "-----------------------------------"
         end
     end 
 
