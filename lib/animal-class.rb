@@ -16,14 +16,20 @@ class Animal
     end 
 
     def display_info
+        puts
+        puts
+        puts
         puts "Name: #{self.name}" 
         puts "Sex: #{self.sex}"
         puts "Species: #{self.species}"
         puts "Birthday: #{self.born}"
+        puts
+        puts
         puts "Bio: #{self.bio}"
     end
 
     def donate
+        puts
         puts "We're sending a toy on your behalf, #{self.name} will be very happy!"
     end
 

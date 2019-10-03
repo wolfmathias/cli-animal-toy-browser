@@ -12,7 +12,10 @@ class Toy
     end 
 
     def self.list_all
-        @@all.each.with_index(1) {|toy, i| puts "#{i}. #{toy.name}"}
+        @@all.each.with_index(1) do |toy, i| 
+            puts "#{i}. #{toy.name} -- #[toy.price}"
+            puts "Description: #{toy.description}"
+        end
     end 
 
     def display_info

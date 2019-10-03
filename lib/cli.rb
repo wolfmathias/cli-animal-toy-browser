@@ -1,3 +1,5 @@
+require 'readline'
+
 class ToyBrowser::CLI
 
     def call
@@ -11,8 +13,39 @@ class ToyBrowser::CLI
         Animal.list_all
     end 
 
-    def list_toys
+    def list_toys(current_animal)
+        puts "Please pick a toy to send to #{current_animal.name}:"
+        # List option of toys to select from. Selecting a toy adds that object instance to animal's list of donated items.
+        # User can choose to go back to animal list to donate again or exit application.
         Toy.list_all
+        input = nil
+        while input != "exit"
+            input = gets.strip
+            if input.to_i <= Toy.all.count && input.to_i != 0
+            current_toy = Toy.all[input.to_i-1]
+            current_animal.donate #add method argument to add toy to animal's list of donated items
+            
+        end
+    end 
+
+    def donate_again
+        puts "Do you want to donate to another animal? (y/n):"
+            input = nil
+            while input != exit    
+                input = gets.strip
+                if input == "y"
+                call
+                elsif input == "n"
+                thank_you
+                else
+                puts "Do you want to donate to another animal? (y/n):"
+                end 
+            end 
+            elsif input == "exit"
+            thank_you 
+            else 
+            puts "Please enter the number next to an animal:"
+            end 
     end 
 
     def thank_you
@@ -29,30 +62,30 @@ class ToyBrowser::CLI
             if input.to_i <= Animal.all.count && input.to_i != 0  
                 current_animal = Animal.all[input.to_i-1]
                 current_animal.display_info
-                puts ""
+                puts 
                 puts "To donate to #{current_animal.name}, type 'donate'. Or type 'list' to get back to the list of animals."
                 input = nil 
-                    while input != "exit" 
-                        input = gets.strip.downcase  
-                        if input.downcase == "donate"
-                            current_animal.donate
-                            puts "Do you want to donate to another animal? (y/n):"
-                            input = gets.strip
-                            call if input == "y"
-                            thank_you if input == "n"
-                        elsif input.downcase == "list"
-                            call
-                        elsif input == "exit"
-                            thank_you
-                        else 
-                            puts "Please type 'donate' or 'list'."
-                        end  
-                    end
+                while input != "exit" 
+                    input = gets.strip.downcase  
+                    if input.downcase == "donate"
+                    #Display list of available toys to donate to specific animal. Toys are own class of objects.
+                    #When toy is chosen, it is added to animal's list of donated items. Person class keeps track of animals and toys donated to.
+                    list_toys(current_animal)
+                    elsif input.downcase == "list"
+                    call
+                    elsif input == "exit"
+                    thank_you
+                    else 
+                    puts "Please type 'donate' or 'list'."
+                    end  
+                end
             elsif input == "exit"
-                thank_you 
+            thank_you 
             else 
-                puts "Please enter the number next to an animal:"
+            puts "Please enter the number next to an animal:"
             end 
         end
     end 
+
+    
 end 
