@@ -24,28 +24,30 @@ class ToyBrowser::CLI
             if input.to_i <= Toy.all.count && input.to_i != 0
             current_toy = Toy.all[input.to_i-1]
             current_animal.donate #add method argument to add toy to animal's list of donated items
-            
+            elsif input == "list"
+            call 
+            elsif input == "exit"
+            thank_you 
+            else
+            puts "Please select the number next to a toy."
+            end
         end
     end 
 
-    def donate_again
-        puts "Do you want to donate to another animal? (y/n):"
-            input = nil
-            while input != exit    
-                input = gets.strip
-                if input == "y"
-                call
-                elsif input == "n"
-                thank_you
-                else
-                puts "Do you want to donate to another animal? (y/n):"
-                end 
+    def donate_again?
+        input = nil        
+        while input == nil
+            
+            puts "Do you want to donate to another animal? (y/n):"
+            input = gets.strip
+            if input == "y"
+            call
+            elsif input == "n"
+            thank_you
+            else
+            puts "Do you want to donate to another animal? (y/n):"
             end 
-            elsif input == "exit"
-            thank_you 
-            else 
-            puts "Please enter the number next to an animal:"
-            end 
+        end 
     end 
 
     def thank_you

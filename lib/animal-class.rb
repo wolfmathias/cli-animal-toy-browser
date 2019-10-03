@@ -31,6 +31,7 @@ class Animal
     def donate
         puts
         puts "We're sending a toy on your behalf, #{self.name} will be very happy!"
+        ToyBrowser::CLI.new.donate_again?
     end
 
     def self.create_from_url(url)
