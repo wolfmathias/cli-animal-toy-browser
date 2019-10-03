@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby 
+
+
+require_relative '../lib/environment'
+
+toy1 = Toy.new
+toy1.name = "Boomer Ball"
+toy1.price = "$30"
+toy1.description = "A nearly indestructible plastic ball. This one is a foot in diameter, great for all sorts of animals!"
+
+# animal1 = Animal.new
+# animal1.name = "Jericho"
+# animal1.species = "Southern White Rhino"
+# animal1.sex = "Male"
+# animal1.born = "1995"
+# animal1.bio = "Jericho is a Rhino at Out of Africa Wildlife Park in Arizona."
+
+# animal2 = Animal.new
+# animal2.name = "Bart"
+# animal2.species = "Two-Toed Sloth"
+# animal2.sex = "Male"
+# animal2.born = "2007"
+# animal2.bio = "Bart is a two-toed sloth at Out of Africa Wildlife Park in Arizona."
+
+Animal.create_from_url("https://outofafricapark.com/meet-theanimals/#")
+
+ToyBrowser::CLI.new.call

@@ -1,0 +1,5 @@
+require_relative '../version'
+require_relative './animal-scraper'
+require_relative './animal-class'
+require_relative './toy-class'
+require_relative './cli'
