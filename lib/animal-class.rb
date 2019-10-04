@@ -1,5 +1,5 @@
 class Animal
-    attr_accessor :name, :species, :sex, :born, :bio, :profile_url
+    attr_accessor :name, :species, :sex, :born, :personal_info, :profile_url, :classification, :fun_facts, :habitat, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation 
     @@all = []
 
     def initialize(animal_info)
@@ -21,9 +21,7 @@ class Animal
     end 
 
     def display_info
-        puts
-        puts
-        puts
+        2.times {puts}
         puts "Name: #{self.name}" 
         puts "Sex: #{self.sex}"
         puts "Species: #{self.species}"
