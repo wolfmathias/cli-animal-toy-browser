@@ -2,7 +2,7 @@
 require 'pry'
 
 class Donor
-    attr_reader :name,  
+    attr_reader :name  
     @@all = []
 
     def initialize(name)
@@ -23,8 +23,8 @@ class Donor
         @@all
     end 
 
-    def self.list_donations(name)
-        toys = Toy.donated_toys.select {|toy| toy.donated_by == name }
+    def self.list_donations(donor)
+        toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
         toys.each {|toy| puts "#{toy.name} donated to #{toy.donated_to.name}."}
     end 
 
@@ -33,9 +33,7 @@ class Donor
         # setting toy status to 'donated' removes that toy from the list of available toys
         toy.donated_to = animal
         toy.donated_by = self 
-        animal.toys << toy
-        donated_toys << toys
-        toy.status = "donated"
+        toy.send("status=", "donated")
         puts
         puts "Thanks, #{self.name}! We're sending a toy on your behalf, #{animal.name} will be very happy!"
         donate_again?
@@ -58,3 +56,4 @@ class Donor
         end 
     end 
 end 
+
