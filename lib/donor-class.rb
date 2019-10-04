@@ -2,12 +2,11 @@
 require 'pry'
 
 class Donor
-    attr_reader :name, :donated_toys 
+    attr_reader :name,  
     @@all = []
 
     def initialize(name)
         @name = name 
-        @donated_toys = []
         @@all << self 
     end 
 
@@ -25,8 +24,8 @@ class Donor
     end 
 
     def list_donations
-        self.donated_toys.each {|toy| puts "#{toy.name} sent to #{}" }
-        binding.pry
+        toys = Toy.donated_toys.select {|toy| toy.donated_by == self }
+        toys.each {|toy| puts "#{toy.name} donated to #{toy.donated_to.name}."}
     end 
 
     def donate(animal, toy)
@@ -59,5 +58,3 @@ class Donor
         end 
     end 
 end 
-
-donor = Donor.new("Adam")

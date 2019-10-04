@@ -83,7 +83,7 @@ class ToyBrowser::CLI
                     input = gets.strip.downcase  
                     if input.downcase == "donate"
                     #Display list of available toys to donate to specific animal. Toys are own class of objects.
-                    #When toy is chosen, it is added to animal's list of donated items. Person class keeps track of animals and toys donated to.
+                    #When toy is chosen, 'donated by' and 'donated to' attrs are set.
                     list_toys(current_animal)
                     elsif input.downcase == "list"
                     call

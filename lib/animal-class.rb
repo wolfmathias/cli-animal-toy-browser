@@ -1,12 +1,11 @@
 class Animal
-    attr_accessor :name, :species, :sex, :born, :bio, :profile_url, :toys
+    attr_accessor :name, :species, :sex, :born, :bio, :profile_url
     @@all = []
 
     def initialize(animal_info)
         animal_info.each do |key, value| 
             self.send("#{key}=", value)
         end
-        @toys = []
         @@all << self
     end 
 
@@ -32,7 +31,8 @@ class Animal
     end
 
     def display_toys
-        self.toys.each {|toy| puts "#{toy.name}"}
+        toys = Toy.donated_toys.select {|toy| toy.donated_to == self}
+        toys.each {|toy| puts "#{toy.name} donated by #{toy.donated_by.name}."}
     end 
 
     # Use Donor donate method instead?

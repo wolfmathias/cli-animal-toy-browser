@@ -35,7 +35,10 @@ class Toy
     end 
 
     def status=(status)
+        # When toy is donated, remove it from list of all toys and add it to list of donated toys
+        # then generate new Toy object with same attributes
         if @status == "donated"
+            @@donated_toys << self 
             @@all.delete(self)
             Toy.new(name= self.name, price= self.price, description= self.description)
         end
