@@ -23,8 +23,8 @@ class Donor
         @@all
     end 
 
-    def list_donations
-        toys = Toy.donated_toys.select {|toy| toy.donated_by == self }
+    def self.list_donations(name)
+        toys = Toy.donated_toys.select {|toy| toy.donated_by == name }
         toys.each {|toy| puts "#{toy.name} donated to #{toy.donated_to.name}."}
     end 
 

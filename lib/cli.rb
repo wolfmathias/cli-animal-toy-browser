@@ -88,7 +88,7 @@ class ToyBrowser::CLI
                     elsif input.downcase == "list"
                     call
                     #elsif input == "donations"
-                    
+                    Donor.list_donations(self.name)
                     elsif input == "exit"
                     thank_you
                     else 
