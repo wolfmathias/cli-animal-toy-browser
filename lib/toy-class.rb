@@ -1,11 +1,13 @@
 class Toy
-    attr_accessor :name, :price, :description, :status 
+    attr_accessor :name, :price, :description, :status, :donated_to, :donated_by 
     @@all = []
 
-    def initialize
+    def initialize(name= "Boomer Ball", price= "$30", description= "A nearly indestructible plastic ball. This one is a foot in diameter, great for all sorts of animals!")
         @status = "Waiting to be donated"
         @@all << self 
-        
+        @name = name
+        @price = price 
+        @description = description
     end 
 
     def self.all
@@ -27,7 +29,10 @@ class Toy
         puts self.description
     end 
 
-    def @status=(status)
-        
+    def status=(status)
+        if @status == "donated"
+            @@all.delete(self)
+            Toy.new(name= self.name, price= self.price, description= self.description)
+        end
     end 
 end 
