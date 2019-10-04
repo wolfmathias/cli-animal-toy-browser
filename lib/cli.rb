@@ -59,6 +59,7 @@ class ToyBrowser::CLI
         input = nil
         puts
         puts "Enter the number to see more info, or type exit:"
+        puts "Enter 'donations' to see toys you have already donated."
         while input != "exit"
             input = gets.strip
             if input.to_i <= Animal.all.count && input.to_i != 0  
@@ -66,8 +67,8 @@ class ToyBrowser::CLI
                 current_animal.display_info
                 puts
                 puts 
-                puts "To donate to #{current_animal.name}, type 'donate'. Or type 'list' to get back to the list of animals."
-                puts "You can also type 'donations' to see a list of items you have already donated."
+                puts "Navigation:  "
+                puts "'donate': donate to #{current_animal.name}      'list': go back to list of animals.        'toys': display list of toys already owned by #{current_animal.name}"
                 input = nil 
                 while input != "exit" 
                     input = gets.strip.downcase  
@@ -77,14 +78,16 @@ class ToyBrowser::CLI
                     list_toys(current_animal)
                     elsif input.downcase == "list"
                     call
-                    elsif input == "donations"
-                    Donor.list_donations(@user)
+                    elsif input == "toys"
+                    Animal.toys_received(current_animal)
                     elsif input == "exit"
                     thank_you
                     else 
                     puts "Please type 'donate' or 'list'."
                     end  
                 end
+            elsif input == "donations"
+            Donor.list_donations(@user)
             elsif input == "exit"
             thank_you 
             else 

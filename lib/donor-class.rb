@@ -27,7 +27,10 @@ class Donor
     def self.list_donations(donor)
         # user can see list of items they have previously donated and to whom
         toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
-        toys.each {|toy| puts "#{toy.name} donated to #{toy.donated_to.name}."}
+        toys.each do |toy| 
+            puts
+            puts "#{toy.name} donated to #{toy.donated_to.name}." 
+        end
     end 
 
     def donate(animal, toy)

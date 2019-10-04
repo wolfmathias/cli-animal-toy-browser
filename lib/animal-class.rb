@@ -32,10 +32,13 @@ class Animal
         puts "Bio: #{self.bio}"
     end
 
-    def display_toys
+    def self.toys_received(animal)
         # display list of toys that animal has received, and who donated that toy.
-        toys = Toy.donated_toys.select {|toy| toy.donated_to == self}
-        toys.each {|toy| puts "#{toy.name} donated by #{toy.donated_by.name}."}
+        toys = Toy.donated_toys.select {|toy| toy.donated_to == animal}
+        toys.each do |toy| 
+            puts "#{toy.name} donated by #{toy.donated_by.name}." 
+            puts
+        end
     end 
 
     def self.create_from_url(url)
