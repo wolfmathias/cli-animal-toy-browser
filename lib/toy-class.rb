@@ -1,6 +1,7 @@
 class Toy
     attr_accessor :name, :price, :description, :status, :donated_to, :donated_by 
     @@all = []
+    @@donated_toys = []
 
     def initialize(name= "Boomer Ball", price= "$30", description= "A nearly indestructible plastic ball. This one is a foot in diameter, great for all sorts of animals!")
         @status = "Waiting to be donated"
@@ -12,6 +13,10 @@ class Toy
 
     def self.all
         @@all
+    end 
+
+    def self.donated_toys
+        @@donated_toys
     end 
 
     def self.list_all
