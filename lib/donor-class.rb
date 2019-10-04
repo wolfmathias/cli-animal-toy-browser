@@ -1,4 +1,5 @@
-
+#!/usr/bin/env ruby
+require 'pry'
 
 class Donor
     attr_reader :name, :donated_toys 
@@ -24,12 +25,18 @@ class Donor
     end 
 
     def list_donations
-        self.donated_toys
+        self.donated_toys.each {|toy| puts "#{toy.name} sent to #{}" }
+        binding.pry
     end 
 
     def donate(animal, toy)
+        # set toy donated to/by, add toy to animal's list of items, add toy to donor's list of donated items
+        # setting toy status to 'donated' removes that toy from the list of available toys
+        toy.donated_to = animal
+        toy.donated_by = self 
         animal.toys << toy
-        donated_toys << animal.toys
+        donated_toys << toys
+        toy.status = "donated"
         puts
         puts "Thanks, #{self.name}! We're sending a toy on your behalf, #{animal.name} will be very happy!"
         donate_again?
@@ -52,3 +59,5 @@ class Donor
         end 
     end 
 end 
+
+donor = Donor.new("Adam")
