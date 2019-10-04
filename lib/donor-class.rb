@@ -11,6 +11,7 @@ class Donor
     end 
 
     def self.find_or_create_by_name(name)
+        # On CLI instantiation, donor is created or selected if donor already exists
         if Donor.all.find {|donor| donor.name == name}
         user = Donor.all.find {|donor| donor.name == name}
         else
@@ -24,13 +25,15 @@ class Donor
     end 
 
     def self.list_donations(donor)
+        # user can see list of items they have previously donated and to whom
         toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
         toys.each {|toy| puts "#{toy.name} donated to #{toy.donated_to.name}."}
     end 
 
     def donate(animal, toy)
-        # set toy donated to/by, add toy to animal's list of items, add toy to donor's list of donated items
+        # set toy.donated to/by, add toy to list of donated items
         # setting toy status to 'donated' removes that toy from the list of available toys
+        # toy object instantiates new identical item to keep toy list populated
         toy.donated_to = animal
         toy.donated_by = self 
         toy.send("status=", "donated")

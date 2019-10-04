@@ -4,6 +4,7 @@ class ToyBrowser::CLI
     attr_reader :user 
 
     def initialize
+        # Accepts user's name and instantiates new donor object with name
         puts "Welcome! Let's start with getting your name:"
         name = nil 
         while name == nil
@@ -15,6 +16,7 @@ class ToyBrowser::CLI
     def call
         2.times {puts}
         puts "Choose which animal you want to buy a toy for:"
+        puts
         list_animals 
         menu
         
@@ -25,6 +27,7 @@ class ToyBrowser::CLI
     end 
 
     def list_toys(current_animal)
+        2.times {puts}
         puts "Please pick a toy to send to #{current_animal.name}:"
         # List option of toys to select from. Selecting a toy adds that object instance to animal's list of donated items.
         # User can choose to go back to animal list to donate again or exit application.
@@ -45,36 +48,23 @@ class ToyBrowser::CLI
         end
     end 
 
-    # def donate_again?
-    #     # submenu displayed after user donates. 
-    #     input = nil        
-    #     while input == nil
-    #         puts "Do you want to donate to another animal? (y/n):"
-    #         input = gets.strip
-    #         if input == "y"
-    #         call
-    #         elsif input == "n"
-    #         thank_you
-    #         else
-    #         puts "Do you want to donate to another animal? (y/n):"
-    #         end 
-    #     end 
-    # end 
-
     def thank_you
         puts "Thank you! Come back again!"
         exit
     end
 
     def menu
+        # Display list of animals. User enters number to select animal
+        # Selecting animal displays that individual animal's information and prompts for donation
         input = nil
+        puts
         puts "Enter the number to see more info, or type exit:"
-        
         while input != "exit"
             input = gets.strip
             if input.to_i <= Animal.all.count && input.to_i != 0  
                 current_animal = Animal.all[input.to_i-1]
                 current_animal.display_info
+                puts
                 puts 
                 puts "To donate to #{current_animal.name}, type 'donate'. Or type 'list' to get back to the list of animals."
                 puts "You can also type 'donations' to see a list of items you have already donated."
@@ -102,6 +92,4 @@ class ToyBrowser::CLI
             end 
         end
     end 
-
-    
 end 
