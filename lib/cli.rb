@@ -54,7 +54,7 @@ class ToyBrowser::CLI
     end
 
     def menu
-        # Display list of animals. User enters number to select animal
+        # Display list of animals. User enters number to select animal or can list toys already donated by user
         # Selecting animal displays that individual animal's information and prompts for donation
         input = nil
         puts
@@ -73,21 +73,25 @@ class ToyBrowser::CLI
                 while input != "exit" 
                     input = gets.strip.downcase  
                     if input.downcase == "donate"
-                    #Display list of available toys to donate to specific animal. Toys are own class of objects.
+                    #Display list of available toys to donate to specific animal
                     #When toy is chosen, 'donated by' and 'donated to' attrs are set.
                     list_toys(current_animal)
                     elsif input.downcase == "list"
                     call
                     elsif input == "toys"
+                    puts 
                     Animal.toys_received(current_animal)
+                    puts "Hit 'Enter' to return to navigation."
                     elsif input == "exit"
                     thank_you
                     else 
-                    puts "Please type 'donate' or 'list'."
+                    puts "Please type 'donate', 'list', or 'toys'."
                     end  
                 end
             elsif input == "donations"
+            puts
             Donor.list_donations(@user)
+            puts "Hit 'Enter' to return to navigation."
             elsif input == "exit"
             thank_you 
             else 

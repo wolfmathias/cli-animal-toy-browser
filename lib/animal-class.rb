@@ -36,8 +36,8 @@ class Animal
         # display list of toys that animal has received, and who donated that toy.
         toys = Toy.donated_toys.select {|toy| toy.donated_to == animal}
         toys.each do |toy| 
-            puts "#{toy.name} donated by #{toy.donated_by.name}." 
             puts
+            puts "#{toy.name} donated by #{toy.donated_by.name}." 
         end
     end 
 
