@@ -2,10 +2,7 @@
 require_relative '../lib/environment'
 
 puts "Please wait, loading program..."
-toy1 = Toy.new
-toy1.name = "Boomer Ball"
-toy1.price = "$30"
-toy1.description = "A nearly indestructible plastic ball. This one is a foot in diameter, great for all sorts of animals!"
+Toy.create_from_collection(toy_list)
 
 Animal.create_from_url("https://outofafricapark.com/meet-theanimals/#")
 
