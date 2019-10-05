@@ -35,6 +35,7 @@ class Donor
                 puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
             end
         end
+        puts
         puts "Enter the number next to an animal to see more info:"
     end 
 

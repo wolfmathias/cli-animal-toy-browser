@@ -8,7 +8,7 @@ class ToyBrowser::CLI
         puts "Welcome! Let's start with getting your name:"
         name = nil 
         while name == nil
-            name = gets.strip 
+            name = gets.strip.downcase.capitalize # standardizes all user names
             @user = Donor.find_or_create_by_name(name)
         end 
     end
@@ -20,7 +20,6 @@ class ToyBrowser::CLI
         puts
         list_animals 
         menu
-        
     end 
 
     def list_animals
