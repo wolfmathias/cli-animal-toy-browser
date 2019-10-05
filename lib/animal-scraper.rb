@@ -31,9 +31,11 @@ class AnimalScraper
             values = profile.css("h3 + *").map {|info| info.text} 
             # iterate though hash of keys and values and set each one
             # .delete and .gsub are standardizing keys to conventional format (ie. "Fun Facts:" to fun_facts)
+            # regex is looking for forward slashes and ensuring only the first word is accepted (ie. "Habitat/Range" becomes "Habitat")
+            # regex ensures all animal keys are standard, as some profiles choose to use listings with an additional descriptor after a forward slash
             i = 0 
             while i < 9
-            animal[keys[i].delete('":').gsub(" ", "_").downcase.to_sym] = values[i] 
+            animal[keys[i].delete('":').sub(/\w.+\//, '').gsub(" ", "_").downcase.to_sym] = values[i] 
             i += 1
             end
             # set remaining keys and values
@@ -55,6 +57,8 @@ class AnimalScraper
         AnimalScraper.scrape_animal_info(url)
     end
 end
+
+
 
 # class AnimalScraper OLD METHOD
 #     #this scraper written for Out of Africa's website: https://outofafricapark.com/meet-theanimals/#

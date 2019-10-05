@@ -4,14 +4,13 @@ require 'pry'
 # require_relative 'animal-scraper.rb' 
 
 class Animal
-    attr_accessor :name, :species, :sex, :born, :personal_info, :profile_url, :classification, :fun_facts, :habitat, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation 
+    attr_accessor :name, :species, :sex, :born, :personal_info, :personal, :profile_url, :classification, :fun_facts, :habitat, :habitat, :range, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation, :ecology, :conservation_status
     @@all = []
 
     def initialize(animal_info)
         # expects a hash of attributes with values. Each attribute is assigned on instantiation.
         animal_info.each do |key, value| 
             self.send("#{key}=", value)
-            binding.pry
         end
         @@all << self
     end 
@@ -31,7 +30,7 @@ class Animal
     def display_info
         # displays the first level of animal information
         2.times {puts}
-        puts "Name: #{self.name}" 
+        puts "Name: #{self.name}"
         puts "Sex: #{self.sex}"
         puts "Species: #{self.species}"
         puts "Birthday: #{self.born}"
@@ -54,5 +53,3 @@ class Animal
         animal_list.each {|animal_info| Animal.new(animal_info)}
     end 
 end 
-
-Animal.create_from_url("https://outofafricapark.com/meet-theanimals/#")
