@@ -35,7 +35,8 @@ class Animal
         puts "Species: #{self.species}"
         puts "Birthday: #{self.born}"
         puts
-        puts "Bio: #{self.bio}"
+        puts "Bio: "
+        puts self.personal_info or self.personal
     end
 
     def self.toys_received(animal)

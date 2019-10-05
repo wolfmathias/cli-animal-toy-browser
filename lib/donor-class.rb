@@ -29,7 +29,7 @@ class Donor
         toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
         toys.each do |toy| 
             puts
-            puts "#{toy.name} donated to #{toy.donated_to.name}." 
+            puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
         end
     end 
 

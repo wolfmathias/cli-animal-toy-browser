@@ -70,7 +70,7 @@ class ToyBrowser::CLI
                 puts "Navigation:  "
                 puts "'donate': donate to #{current_animal.name}      'list': go back to list of animals.        'toys': display list of toys already owned by #{current_animal.name}"
                 input = nil 
-                while input != "exit" 
+                while input.downcase != "exit" 
                     input = gets.strip.downcase  
                     if input.downcase == "donate"
                     #Display list of available toys to donate to specific animal
@@ -81,18 +81,20 @@ class ToyBrowser::CLI
                     elsif input == "toys"
                     puts 
                     Animal.toys_received(current_animal)
+                    puts
                     puts "Hit 'Enter' to return to navigation."
-                    elsif input == "exit"
+                    elsif input.downcase == "exit"
                     thank_you
                     else 
                     puts "Please type 'donate', 'list', or 'toys'."
                     end  
                 end
-            elsif input == "donations"
+            elsif input.downcase == "donations"
             puts
             Donor.list_donations(@user)
+            puts
             puts "Hit 'Enter' to return to navigation."
-            elsif input == "exit"
+            elsif input.downcase == "exit"
             thank_you 
             else 
             puts "Please enter the number next to an animal:"
