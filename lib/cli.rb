@@ -9,6 +9,7 @@ class ToyBrowser::CLI
         name = nil 
         while name == nil
             name = gets.strip.downcase.capitalize # standardizes all user names
+            exit if name == "Exit"
             @user = Donor.find_or_create_by_name(name)
         end 
     end

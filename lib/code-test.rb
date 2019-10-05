@@ -1,11 +1,59 @@
-#!/usr/bin/env ruby 
-require_relative '../lib/environment'
+#!/usr/bin/env ruby
+require "nokogiri"
+require 'open-uri'
+require 'pry'
 
-puts
-puts "This application allows you to browse a list of animals and donate toys to them."
-puts "Please wait, loading program..."
+class Toy
+    attr_accessor :name, :price, :description, :status, :donated_to, :donated_by 
+    @@all = []
+    @@donated_toys = []
 
+    def initialize(toy_hash)
+        @status = "Waiting to be donated"
+        toy_hash.each {|key, value| self.send("#{key}=", value)}
+        @@all << self
+        binding.pry
+    end 
 
+    def self.create_from_collection(collection)
+        collection.each {|toy_hash| Toy.new(toy_hash)}
+    end
+
+    def self.all
+        @@all
+    end 
+
+    def self.donated_toys
+        @@donated_toys
+    end 
+
+    def self.list_all
+        # creates list for CLI 
+        @@all.each.with_index(1) do |toy, i| 
+            puts "-----------------------------------"
+            puts "#{i}. #{toy.name} -- #{toy.price}"
+            puts "Description: #{toy.description}"
+            puts "-----------------------------------"
+            sleep 0.05
+        end
+    end 
+
+    def display_info
+        puts self.name
+        puts self.price
+        puts self.description
+    end 
+
+    def status=(status)
+        # When toy is donated, remove it from list of all toys and add it to list of donated toys
+        # then generate new Toy object with same attributes
+            @status = "donated"
+            @@donated_toys << self 
+            @@all.delete(self)
+            Toy.new(name= self.name, price= self.price, description= self.description)
+        
+    end 
+end 
 
 toy_list = [
     {name: "Boomer Ball",
@@ -53,10 +101,4 @@ toy_list = [
     description: "Durable bag that makes noises when scrunching it, great for cats."
     }]
 
-Toy.create_from_collection(toy_list)
-
-Animal.create_from_url("https://outofafricapark.com/meet-theanimals/#")
-
-
-
-ToyBrowser::CLI.new.call
+    Toy.create_from_collection(toy_list)
