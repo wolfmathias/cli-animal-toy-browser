@@ -20,6 +20,7 @@ class Toy
     end 
 
     def self.list_all
+        # creates list for CLI 
         @@all.each.with_index(1) do |toy, i| 
             puts "-----------------------------------"
             puts "#{i}. #{toy.name} -- #{toy.price}"

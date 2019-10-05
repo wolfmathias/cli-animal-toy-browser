@@ -46,7 +46,7 @@ class Donor
     end 
 
     def donate_again?
-        # submenu displayed after user donates. 
+        # submenu displayed after user donates
         input = nil        
         while input == nil
             puts "Do you want to return to the donation app? (y/n):"

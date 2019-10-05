@@ -7,6 +7,7 @@ class AnimalScraper
     #this scraper written for Out of Africa's website: https://outofafricapark.com/meet-theanimals/#
 
     def self.scrape_animal_index(url)
+        # scrapes slider information and collect data on each entry
         animal_list = []
         site = Nokogiri::HTML(open(url))
         site.css("#slider_animals .animal").each do |animal|
@@ -20,6 +21,7 @@ class AnimalScraper
     end 
 
     def self.scrape_animal_info(url)
+        # scrapes individual animal pages and gathers data for hash 
         animal_list = AnimalScraper.scrape_animal_index(url)
         profile_list = []
         animal_list.each do |animal| 
@@ -49,6 +51,7 @@ class AnimalScraper
     end
 
     def self.create_animal_collection(url)
+        # sends collected hash to Animal object for instantiation
         AnimalScraper.scrape_animal_info(url)
     end
 end
