@@ -23,7 +23,8 @@ class Animal
         # generates a list of animal names and species for display in CLI
         Animal.all.each.with_index(1) do |animal, i| 
             puts
-            puts "#{i}. #{animal.name} the #{animal.species}" 
+            puts "#{i}. #{animal.name} the #{animal.species}"
+            sleep 0.05
         end
     end 
 
@@ -31,9 +32,13 @@ class Animal
         # displays the first level of animal information
         2.times {puts}
         puts "Name: #{self.name}"
+        sleep 0.05
         puts "Sex: #{self.sex}"
-        puts "Birthday: #{self.born}"
+        sleep 0.05
+        puts "Birthday: #{self.born.split.join(" ")}" # split/join removes excess white space, paired animals separated birth dates using excessive spaces on website
+        sleep 0.05
         puts "Species: #{self.species}"
+        sleep 0.2
         puts
         puts self.classification
         if @conservation_status != nil
@@ -41,12 +46,18 @@ class Animal
         end
         puts
         puts "Bio: "
-        puts self.personal_info or self.personal
+        puts self.personal_info || self.personal
+        sleep 0.5
     end
 
+    # two following methods display corresponding info. Due to site structure, some animals use different key names for same info
     def habitat
         @habitat || @range
     end
+
+    def ecology
+        @ecology || @ecology_and_conservation or puts "No ecology information to display."
+    end 
 
     def self.toys_received(animal)
         # displays list of toys that animal has received, and who donated that toy.

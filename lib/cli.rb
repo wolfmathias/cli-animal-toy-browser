@@ -16,6 +16,7 @@ class ToyBrowser::CLI
     def call
         2.times {puts}
         puts "Choose which animal you want to buy a toy for:"
+        sleep 1
         puts
         list_animals 
         menu
@@ -93,7 +94,7 @@ class ToyBrowser::CLI
                         puts
                         # puts "Hit enter to return to menu function" (is this code needed? How to make user not have to hit enter?)
                     # below menu items display their corresponding info
-                    elsif input == "fun facts"
+                    elsif input == "fun facts" || input == "facts"
                         puts 
                         puts "#{current_animal.fun_facts}"
                         puts 
@@ -119,7 +120,7 @@ class ToyBrowser::CLI
                         puts 
                     elsif input == "ecology and conservation" || input == "ecology"
                         puts 
-                        puts "#{current_animal.ecology_and_conservation}"
+                        puts "#{current_animal.ecology}"
                         puts 
                     elsif input == "menu"
                         self.display_animal_profile_menu(current_animal)

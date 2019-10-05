@@ -26,6 +26,7 @@ class Toy
             puts "#{i}. #{toy.name} -- #{toy.price}"
             puts "Description: #{toy.description}"
             puts "-----------------------------------"
+            sleep 0.05
         end
     end 
 
