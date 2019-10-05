@@ -4,7 +4,7 @@ require 'pry'
 # require_relative 'animal-scraper.rb' 
 
 class Animal
-    attr_accessor :name, :species, :sex, :born, :personal_info, :personal, :profile_url, :classification, :fun_facts, :habitat, :habitat, :range, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation, :ecology, :conservation_status
+    attr_accessor :name, :species, :sex, :born, :personal_info, :personal, :profile_url, :classification, :fun_facts, :habitat, :range, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation, :ecology, :conservation_status
     @@all = []
 
     def initialize(animal_info)
@@ -32,19 +32,32 @@ class Animal
         2.times {puts}
         puts "Name: #{self.name}"
         puts "Sex: #{self.sex}"
-        puts "Species: #{self.species}"
         puts "Birthday: #{self.born}"
+        puts "Species: #{self.species}"
+        puts
+        puts self.classification
+        if @conservation_status != nil
+        puts "Conservation Status: #{self.conservation_status}"
+        end
         puts
         puts "Bio: "
         puts self.personal_info or self.personal
     end
 
+    def habitat
+        @habitat || @range
+    end
+
     def self.toys_received(animal)
         # displays list of toys that animal has received, and who donated that toy.
         toys = Toy.donated_toys.select {|toy| toy.donated_to == animal}
-        toys.each do |toy| 
-            puts
-            puts "#{toy.name} donated by #{toy.donated_by.name}." 
+        if toys.count == 0
+            puts "#{animal.name} doesn't have any toys yet! You can change that!"
+        else 
+            toys.each do |toy| 
+                puts
+                puts "#{toy.name} donated by #{toy.donated_by.name}." 
+            end
         end
     end 
 

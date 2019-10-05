@@ -27,9 +27,13 @@ class Donor
     def self.list_donations(donor)
         # user can see list of items they have previously donated and to whom
         toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
-        toys.each do |toy| 
-            puts
-            puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
+        if toys.count == 0
+            puts "You haven't donated anything yet!" 
+        else 
+            toys.each do |toy| 
+                puts
+                puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
+            end
         end
     end 
 
@@ -42,22 +46,25 @@ class Donor
         toy.send("status=", "donated")
         puts
         puts "Thanks, #{self.name}! We're sending a toy on your behalf, #{animal.name} will be very happy!"
+        puts "Enrichment is an important part of an animal's life. It keeps them mentally engaged and healthy."
+        puts
         donate_again?
     end 
 
     def donate_again?
         # submenu displayed after user donates
-        input = nil        
-        while input == nil
+        input = ""        
+        while input == ""
             puts "Do you want to return to the donation app? (y/n):"
-            input = gets.strip
-            if input == "y"
+            input = gets.strip.downcase
+            if input == "y" || input == "yes"
             ToyBrowser::CLI.new.call
-            elsif input == "n"
+            elsif input == "n" || input == "no" || input == "exit"
              puts "Thank you for your support, please visit again!"
              exit 
             else
             puts "Do you want to return to the donation app? (y/n):"
+            input = ""
             end 
         end 
     end 
