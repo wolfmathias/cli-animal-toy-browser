@@ -70,7 +70,7 @@ class ToyBrowser::CLI
         # Selecting animal displays that individual animal's information and prompts for donation
         input = nil
         puts
-        puts "Enter the number to see more info, or type exit:"
+        puts "Enter the number next to an animal to see more info:"
         puts "Enter 'donations' to see toys you have already donated."
         while input != "exit"
             input = gets.strip

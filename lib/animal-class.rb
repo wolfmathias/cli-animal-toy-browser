@@ -47,7 +47,7 @@ class Animal
         puts
         puts "Bio: "
         puts self.personal_info || self.personal
-        sleep 0.5
+        puts
     end
 
     # two following methods display corresponding info. Due to site structure, some animals use different key names for same info
@@ -63,11 +63,11 @@ class Animal
         # displays list of toys that animal has received, and who donated that toy.
         toys = Toy.donated_toys.select {|toy| toy.donated_to == animal}
         if toys.count == 0
-            puts "#{animal.name} doesn't have any toys yet! You can change that!"
+            puts "#{animal.name} doesn't have any toys yet! Type 'donate' to change that!"
         else 
             toys.each do |toy| 
                 puts
-                puts "#{toy.name} donated by #{toy.donated_by.name}." 
+                puts "#{toy.name} - Donated by #{toy.donated_by.name}." 
             end
         end
     end 

@@ -4,14 +4,18 @@ class Toy
     @@donated_toys = []
 
     def initialize(toy_hash)
-        @status = "Waiting to be donated"
         toy_hash.each {|key, value| self.send("#{key}=", value)}
+        @status = "Waiting to be donated"
+        # @attributes is hash, info is used to instantiate new identical object when status is changed to 'donated'
+        @attributes = {name: self.name, price: self.price, description: self.description}
         @@all << self
-        binding.pry
     end 
 
     def self.create_from_collection(collection)
-        collection.each {|toy_hash| Toy.new(toy_hash)}
+        collection.each do |toy_hash| 
+            Toy.new(toy_hash)
+
+        end
     end
 
     def self.all
@@ -25,10 +29,9 @@ class Toy
     def self.list_all
         # creates list for CLI 
         @@all.each.with_index(1) do |toy, i| 
-            puts "-----------------------------------"
+            puts 
             puts "#{i}. #{toy.name} -- #{toy.price}"
             puts "Description: #{toy.description}"
-            puts "-----------------------------------"
             sleep 0.05
         end
     end 
@@ -45,8 +48,7 @@ class Toy
             @status = "donated"
             @@donated_toys << self 
             @@all.delete(self)
-            Toy.new(name= self.name, price= self.price, description= self.description)
-        
+            Toy.new(@attributes)
     end 
 end 
 

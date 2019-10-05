@@ -35,6 +35,7 @@ class Donor
                 puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
             end
         end
+        puts "Enter the number next to an animal to see more info:"
     end 
 
     def donate(animal, toy)
@@ -45,7 +46,7 @@ class Donor
         toy.donated_by = self 
         toy.send("status=", "donated")
         puts
-        puts "Thanks, #{self.name}! We're sending a toy on your behalf, #{animal.name} will be very happy!"
+        puts "Thanks, #{self.name}! We're sending a #{toy.name} on your behalf, #{animal.name} will be very happy!"
         puts "Enrichment is an important part of an animal's life. It keeps them mentally engaged and healthy."
         puts
         donate_again?
