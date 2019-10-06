@@ -1,16 +1,15 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ToyBrowser/version"
-require "ToyBrowser/lib/environment"
+$LOAD_PATH.unshift('.') unless $LOAD_PATH.include?('.')
 
 Gem::Specification.new do |spec|
   spec.name          = "ToyBrowser"
-  spec.version       = ToyBrowser::VERSION
+  spec.version       = "0.1.0"
   spec.authors       = ["mplichta"]
   spec.email         = ["bigcatplichta@gmail.com"]
 
-  spec.summary       = %q{TODO: This is the first portfolio project for Flatiron school.}
-  spec.description   = %q{TODO: This project concept will eventually be used to create a new working website for the WildHeart Foundation, a nonprofit whose mission is to improve the lives of wild animals in captivity.}
+  spec.summary       = %q{This is the first portfolio project for Flatiron school.}
+  spec.description   = %q{This project concept will eventually be used to create a new working website for the WildHeart Foundation, a nonprofit whose mission is to improve the lives of wild animals in captivity.}
   spec.homepage      = "https://github.com/bigcatplichta/cli-data-gem-portfolio-project"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
@@ -31,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "pry"
 end
