@@ -34,7 +34,7 @@ class ToyBrowser::CLI
         input = nil
         while input != "exit"
             input = gets.strip
-            if input.to_i <= Toy.all.count && input.to_i != 0
+            if input.to_i <= Toy.all.count && input.to_i > 0
             current_toy = Toy.all[input.to_i-1]
             @user.donate(current_animal, current_toy) #add method argument to add toy to animal's list of donated items
             elsif input == "list"
@@ -72,7 +72,7 @@ class ToyBrowser::CLI
         puts "Enter 'donations' to see toys you have already donated."
         while input != "exit"
             input = gets.strip
-            if input.to_i <= Animal.all.count && input.to_i != 0  
+            if input.to_i <= Animal.all.count && input.to_i > 0  
                 current_animal = Animal.all[input.to_i-1]
                 current_animal.display_info
                 puts
