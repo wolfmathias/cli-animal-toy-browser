@@ -43,7 +43,9 @@ class AnimalScraper
                 if sex == "(m)"
                 animal[:sex] = "Male"
                 elsif sex == "(f)"
-                animal[:sex] = "Female"           sex= nil
+                animal[:sex] = "Female"           
+                else
+                sex= nil
                 end 
         end
         animal_list 
