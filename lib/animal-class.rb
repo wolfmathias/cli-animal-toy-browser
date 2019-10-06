@@ -1,7 +1,4 @@
-#!/usr/bin/env ruby
-require 'pry'
-# Enable below line when executing file outside of ./bin/toy-browser:
-# require_relative 'animal-scraper.rb' 
+#!/usr/bin/env ruby 
 
 class Animal
     attr_accessor :name, :species, :sex, :born, :personal_info, :personal, :profile_url, :classification, :fun_facts, :habitat, :range, :physical, :life_cycle, :behavior, :diet, :ecology_and_conservation, :ecology, :conservation_status

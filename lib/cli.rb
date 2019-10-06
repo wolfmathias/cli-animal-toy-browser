@@ -1,5 +1,3 @@
-require 'readline'
-
 class ToyBrowser::CLI
     attr_reader :user 
 

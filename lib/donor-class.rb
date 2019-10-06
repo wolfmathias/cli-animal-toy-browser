@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'pry'
 
 class Donor
     attr_reader :name  
