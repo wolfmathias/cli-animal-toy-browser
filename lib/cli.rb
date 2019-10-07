@@ -90,7 +90,6 @@ class ToyBrowser::CLI
                         puts 
                         Animal.toys_received(current_animal)
                         puts
-                        # puts "Hit enter to return to menu function" (is this code needed? How to make user not have to hit enter?)
                     # below menu items display their corresponding info
                     elsif input == "fun facts" || input == "facts"
                         puts 
