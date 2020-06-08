@@ -4,19 +4,19 @@ This gem is the basis for a future web page to allow visitors to buy toys for an
 
 ## Installation
 
-Add this line to your application's Gemfile:
+This README assumes Ruby and the Ruby gem 'Bundler' are installed on your machine.
 
-```ruby
-gem 'ToyBrowser'
-```
+Clone the repo and navigate to the newly created directory. Install dependencies using bundler.
 
-And then execute:
+`git clone git@github.com:bigcatplichta/cli-data-gem-portfolio-project.git`
 
-    $ bundle
+`cd ./cli-data-gem-portfolio-project.git`
 
-Or install it yourself as:
+`bundle install`
 
-    $ gem install ToyBrowser
+Run the 'toy-browser' file inside '/bin'
+
+`ruby bin/toy-browser`
 
 ## Usage
 
