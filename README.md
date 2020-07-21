@@ -97,19 +97,90 @@ The `menu` method uses a 'while' loop to keep some if/else conditionals repeatin
                     
                 end
             elsif input.downcase == "donations"
-            puts
-            Donor.list_donations(@user)
-            puts
+                puts
+                Donor.list_donations(@user)
+                puts
             elsif input.downcase == "exit"
-            thank_you 
+                thank_you 
             else 
-            puts "Please enter the number next to an animal:"
+                puts "Please enter the number next to an animal:"
             end 
         end
     end 
 ```
 
-Above, `input` is initially set to nil. Then we loop inside `while input != "exit"`. With this 
+Above, `input` is initially set to nil. Then we loop inside `while input != "exit"`. Inside of this loop, if/else statements are used to check the input. If a number is entered, that animal with the corresponding index (minus 1 to account for the array index) and the animal information is shown. Additional if/else statements are inside a while loop after a number is entered, these check for input like "habitat" or "diet" and print out the appropriate info. The user can also enter "donations" to see a list of their previous donations.
+
+## Donating toys
+
+If a user inputs "donate", 'current_animal' is passed as an argument to 'list_toys'. This method prints out a list of all toys and prompts the user to select one.
+
+```
+    def list_toys(current_animal)
+        2.times {puts}
+        puts "Please pick a toy to send to #{current_animal.name}:"
+        # List option of toys to select from. Selecting a toy adds that object instance to animal's list of donated items.
+        # User can choose to go back to animal list to donate again or exit application.
+        Toy.list_all
+        input = nil
+        while input != "exit"
+            input = gets.strip
+            if input.to_i <= Toy.all.count && input.to_i > 0
+            current_toy = Toy.all[input.to_i-1]
+            @user.donate(current_animal, current_toy) #add method argument to add toy to animal's list of donated items
+            elsif input == "list"
+            call 
+            elsif input == "exit"
+            thank_you 
+            else
+            puts "Please select the number next to a toy."
+            end
+        end
+    end
+```
+
+When a number is entered, this input is used to select the toy from the array returned by 'Toy.all' with the corresponding index. 'current_toy' and 'current_animal' are then passed as arguments to '@user.donate'. '@user' is an instance variable of ToyBrowser which holds the instance of Donor, previously created when we entered a name.
+
+This method takes the toy and animal as arguments, then sets the 'donated_to' and 'donated_by' attributes of the toy.
+
+```
+    def donate(animal, toy)
+        # set toy.donated to/by, add toy to list of donated items
+        # setting toy status to 'donated' removes that toy from the list of available toys
+        # toy object instantiates new identical item to keep toy list populated
+        toy.donated_to = animal
+        toy.donated_by = self 
+        toy.send("status=", "donated")
+        puts
+        puts "Thanks, #{self.name}! We're sending a #{toy.name} on your behalf, #{animal.name} will be very happy!"
+        puts "Enrichment is an important part of an animal's life. It keeps them mentally engaged and healthy."
+        puts
+        donate_again?
+    end
+```
+
+The 'Donor' class also includes methods such as 'list_donations' and 'donate_again', which provide further functionality of the app. 
+
+```
+    def self.list_donations(donor)
+        # user can see list of items they have previously donated and to whom
+        toys = Toy.donated_toys.select {|toy| toy.donated_by == donor }
+        if toys.count == 0
+            puts "You haven't donated anything yet!" 
+        else 
+            toys.each do |toy| 
+                puts
+                puts "#{toy.name} donated to #{toy.donated_to.name} the #{toy.donated_to.species}." 
+            end
+        end
+        puts
+        puts "Enter the number next to an animal to see more info:"
+    end
+```
+Above, `list_donations` selects a toy from the list of 'donated_toys', which is a class variable of 'Toy' containing an array of all toys that have been donated. The toys are selected by checking the 'donated_by' attribute against the 'donor' that was passed as an argument. 
+
+After donating, the app asks the user if they would like to return to the donation app. If the input is yes, a new instance of ToyBrowser is created and called, again prompting for a username. Because previous instances of Donors are still saved in the array of `Donor.all`, previously created donors can be used again.
+
 ## Installation
 
 This README assumes Ruby and the Ruby gem 'Bundler' are installed on your machine.
